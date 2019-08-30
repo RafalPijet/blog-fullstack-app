@@ -1,4 +1,10 @@
 import React from 'react';
+import {Switch, Route} from 'react-router-dom';
+import MainLayout from './components/layouts/MainLayout/MainLayout';
+import Contact from './components/pages/Contact/ContactPage';
+import Home from './components/pages/Home/HomePage';
+import NotFound from './components/pages/NotFound/NotFoundPage';
+import Posts from './components/pages/Posts/PostsPage';
 
 class App extends React.Component {
     constructor() {
@@ -8,22 +14,17 @@ class App extends React.Component {
         }
     }
 
-    componentDidMount() {
-        fetch('http://localhost:8000/api/posts')
-            .then(res => res.json())
-            .then(res => this.setState({posts: res}))
-            .then(() => console.log(this.state.posts));
-
-    }
-
     render() {
         return (
-            <div className="App">
-                <ul>
-                    {this.state.posts.map(post =>
-                    <li key={post.id}>{`title: ${post.title}: content: ${post.content}`}</li>
-                    )}
-                </ul>
+            <div>
+                <MainLayout>
+                    <Switch>
+                        <Route path='/' exact component={Home} />
+                        <Route path='/posts' exact component={Posts} />
+                        <Route path='/contact' exact component={Contact} />
+                        <Route component={NotFound}/>
+                    </Switch>
+                </MainLayout>
             </div>
         );
     }
