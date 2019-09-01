@@ -7,6 +7,7 @@ const createActionName = name => `app/${reducerName}/${name}`;
 export const LOAD_POSTS = createActionName('LOAD_POSTS');
 export const loadPosts = payload => ({payload, type: LOAD_POSTS});
 export const getPosts = ({posts}) => posts;
+export const getQuantityOfPosts = ({posts}) => posts.length;
 
 /*THUNKS*/
 export const loadPostsRequest = () => {

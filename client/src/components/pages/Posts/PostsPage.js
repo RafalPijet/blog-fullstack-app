@@ -1,9 +1,9 @@
 import React from 'react';
 import PageTitle from '../../common/PageTitle/PageTitle';
 import Posts from '../../features/Posts/PostsContainer';
-import PostsCounter from '../../features/PostsCounter/PostsCounter';
+import PostsCounter from '../../features/PostsCounter/PostsCounterContainer';
 
-const PostsPage = props =>
+const PostsPage = () =>
     <div>
         <PageTitle>Posts list</PageTitle>
         <PostsCounter/>
