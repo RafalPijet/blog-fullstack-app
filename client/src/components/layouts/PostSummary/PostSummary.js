@@ -4,11 +4,12 @@ import './PostSummary.scss';
 import Button from '../../common/Button/Button';
 import SmallTitle from '../../common/SmallTitle/SmallTitle';
 import HtmlBox from '../../common/HtmlBox/HtmlBox';
+import {cutText} from "../../../utils/functions";
 
 const PostSummary = ({id, title, content}) => (
     <article className="post-summary">
         <SmallTitle>{title}</SmallTitle>
-        <HtmlBox>{content}</HtmlBox>
+        <HtmlBox>{cutText(content, 60)}</HtmlBox>
         <Button variant="primary">Read More</Button>
     </article>
 );

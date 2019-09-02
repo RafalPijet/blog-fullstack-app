@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PostsList from '../../layouts/PostsList/PostsList';
 import Spinner from '../../common/Spinner/Spinner';
+import Alert from '../../common/Alert/Alert';
 
 class Posts extends React.Component {
 
@@ -12,12 +13,16 @@ class Posts extends React.Component {
 
     render() {
         const {posts, request} = this.props;
-        return (
-            <div>
-                <PostsList posts={posts}/>
-                {request.pending && <Spinner/>}
-            </div>
-        );
+
+        if (!request.pending && request.success && posts.length > 0) {
+            return <PostsList posts={posts}/>;
+        } else if (request.pending || request.success === null) {
+            return <Spinner/>;
+        } else if (!request.pending && request.error !== null) {
+            return <Alert variant="error">{request.error}</Alert>;
+        } else if (!request.pending && request.success && posts.length === 0) {
+            return <Alert variant="info">No posts</Alert>
+        }
     }
 }
 
