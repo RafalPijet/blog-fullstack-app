@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PostsList from '../../layouts/PostsList/PostsList';
+import Spinner from '../../common/Spinner/Spinner';
 
 class Posts extends React.Component {
 
@@ -9,13 +11,11 @@ class Posts extends React.Component {
     }
 
     render() {
-        const {posts} = this.props;
+        const {posts, request} = this.props;
         return (
             <div>
-                Posts
-                <ul>
-                    {posts.map(post => <li key={post.id}>{post.title}</li>)}
-                </ul>
+                <PostsList posts={posts}/>
+                {request.pending && <Spinner/>}
             </div>
         );
     }
