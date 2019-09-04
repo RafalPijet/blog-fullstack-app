@@ -1,8 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import PageTitle from '../../common/PageTitle/PageTitle';
+import PostItem from '../../features/PostItem/PostItemContainer';
 
-const SinglePost = props =>
+const SinglePost = props => (
     <div>
-        <h1>Single post, id: {props.match.params.id}</h1>
-    </div>;
+        <PageTitle>SinglePost</PageTitle>
+        <PostItem id={props.match.params.id}/>
+    </div>
+);
+
+SinglePost.propTypes = {
+    id: PropTypes.string
+};
 
 export default SinglePost;

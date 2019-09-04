@@ -9,12 +9,6 @@ import AddPost from './components/pages/AddPost/AddPost';
 import SinglePost from './components/pages/SinglePost/SinglePost';
 
 class App extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            posts: []
-        }
-    }
 
     render() {
         return (
