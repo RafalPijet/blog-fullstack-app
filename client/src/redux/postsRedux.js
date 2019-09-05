@@ -51,11 +51,26 @@ export const loadPostRequest = id => {
                 dispatch(loadPost(res.data));
                 dispatch(stopRequest());
             } else {
-                dispatch(errorRequest(`Post witd id:${id} don't exist`));
+                dispatch(errorRequest(`Post with id:${id} don't exist`));
             }
 
         } catch (e) {
             dispatch(errorRequest(e.message));
+        }
+    }
+};
+
+export const addPostRequest = post => {
+    return async dispatch => {
+
+        dispatch(startRequest());
+
+        try {
+            let res = axios.post(`${API_URL}/posts`, post);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            dispatch(stopRequest());
+        } catch (err) {
+            dispatch(errorRequest(err.message))
         }
     }
 };
