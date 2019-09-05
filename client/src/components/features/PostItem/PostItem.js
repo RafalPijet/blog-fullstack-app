@@ -18,6 +18,7 @@ class PostItem extends React.Component {
             return (
                 <div>
                     <SmallTitle>{singlePost.title}</SmallTitle>
+                    <p>Author: {singlePost.author}</p>
                     <HtmlBox>{singlePost.content}</HtmlBox>
                 </div>
             )
@@ -35,7 +36,8 @@ PostItem.propTypes = {
     singlePost: PropTypes.shape({
         id: PropTypes.string,
         title: PropTypes.string,
-        content: PropTypes.string
+        content: PropTypes.string,
+        author: PropTypes.string
     }),
     loadPost: PropTypes.func.isRequired
 };

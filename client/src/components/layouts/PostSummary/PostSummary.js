@@ -7,9 +7,10 @@ import HtmlBox from '../../common/HtmlBox/HtmlBox';
 import {cutText} from "../../../utils/functions";
 import {Link} from 'react-router-dom';
 
-const PostSummary = ({id, title, content}) => (
+const PostSummary = ({id, title, content, author}) => (
     <article className="post-summary">
         <SmallTitle>{title}</SmallTitle>
+        <p>Author: {author}</p>
         <HtmlBox>{cutText(content, 60)}</HtmlBox>
         <Link to={'/posts/' + id}>
             <Button variant="primary">Read More</Button>
@@ -20,7 +21,8 @@ const PostSummary = ({id, title, content}) => (
 PostSummary.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired
+    content: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired
 };
 
 export default PostSummary;
