@@ -9,12 +9,14 @@ export const LOAD_POST = createActionName('LOAD_POST');
 export const START_REQUEST = createActionName('START_REQUEST');
 export const STOP_REQUEST = createActionName('STOP_REQUEST');
 export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
+export const RESET_REQUEST = createActionName('RESET_REQUEST');
 
 export const loadPosts = payload => ({payload, type: LOAD_POSTS});
 export const loadPost = post => ({post, type: LOAD_POST});
 export const startRequest = () => ({type: START_REQUEST});
 export const stopRequest = () => ({type: STOP_REQUEST});
 export const errorRequest = error => ({error, type: ERROR_REQUEST});
+export const resetRequest = () => ({type: RESET_REQUEST});
 
 export const getPosts = ({posts}) => posts.data;
 export const getPost = ({posts}) => posts.singlePost;
@@ -66,9 +68,25 @@ export const addPostRequest = post => {
         dispatch(startRequest());
 
         try {
-            let res = axios.post(`${API_URL}/posts`, post);
+            axios.post(`${API_URL}/posts`, post);
             await new Promise(resolve => setTimeout(resolve, 2000));
             dispatch(stopRequest());
+        } catch (err) {
+            dispatch(errorRequest(err.message))
+        }
+    }
+};
+
+export const updatePostRequest = post => {
+    return async dispatch => {
+
+        dispatch(startRequest());
+
+        try {
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            axios.put(`${API_URL}/posts`, post)
+                .then(() => dispatch(stopRequest()))
+                .catch(err => dispatch(errorRequest(err.message)));
         } catch (err) {
             dispatch(errorRequest(err.message))
         }
@@ -97,6 +115,8 @@ export default function reducer(statePart = initialState, action = {}) {
             return {...statePart, request: {pending: false, error: null, success: true}};
         case ERROR_REQUEST:
             return {...statePart, request: {pending: false, error: action.error, success: false}};
+        case RESET_REQUEST:
+            return {...statePart, request: {pending: false, error: null, success: null}};
         default:
             return statePart;
     }

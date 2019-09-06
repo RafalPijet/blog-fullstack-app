@@ -11,13 +11,31 @@ import Spinner from '../../common/Spinner/Spinner';
 import './PostForm.scss';
 
 class PostForm extends React.Component {
+
     state = {
         post: {
+            id: '',
             title: '',
             author: '',
             content: ''
         }
     };
+
+    componentDidMount() {
+        const {isEdit, resetRequest, getPost} = this.props;
+        resetRequest();
+
+        if (isEdit) {
+            let postToEdit = getPost;
+            this.setState({
+                post: {
+                    id: postToEdit.id,
+                    title: postToEdit.title,
+                    author: postToEdit.author,
+                    content: postToEdit.content
+                }});
+        }
+    }
 
     handleChange = event => {
       const {post} = this.state;
@@ -33,19 +51,31 @@ class PostForm extends React.Component {
         const {addPost} = this.props;
         const {post} = this.state;
         event.preventDefault();
-        addPost(post);
+        let newPost = {
+            title: post.title,
+            author: post.author,
+            content: post.content
+        };
+        addPost(newPost);
+    };
+
+    updatePost = event => {
+        const {updatePost} = this.props;
+        const {post} = this.state;
+        event.preventDefault();
+        updatePost(post);
     };
 
     render() {
         const {post} = this.state;
-        const {handleChange, handleEditor, addPost} = this;
-        const {request} = this.props;
+        const {handleChange, handleEditor, addPost, updatePost} = this;
+        const {request, isEdit} = this.props;
 
-        if (request.error) return <Alert variant="error">{request.error}</Alert>
-        else if (request.success) return <Alert variant="success">Post has been added!</Alert>
-        else if (request.pending) return <Spinner/>
+        if (request.error) return <Alert variant="error">{request.error}</Alert>;
+        else if (request.success) return <Alert variant="success">{isEdit ? "Post has been updated!" : "Post has been added!"}</Alert>
+        else if (request.pending) return <Spinner/>;
         else return (
-            <form onSubmit={addPost}>
+            <form onSubmit={isEdit ? updatePost : addPost}>
                 <TextField label="Title" value={post.title} onChange={handleChange} name="title"/>
                 <TextField label="Author" value={post.author} onChange={handleChange} name="author"/>
                 <SectionTitle>Edit post content</SectionTitle>
@@ -54,7 +84,7 @@ class PostForm extends React.Component {
                             placeholder: false, toolbar:
                                 {buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3']}
                         }}/>
-                <Button variant="primary">Add post</Button>
+                <Button variant="primary">{isEdit ? "Update post" : "Add post"}</Button>
             </form>
         )
     }
@@ -62,7 +92,9 @@ class PostForm extends React.Component {
 
 PostForm.propTypes = {
     request: PropTypes.object.isRequired,
-    addPost: PropTypes.func.isRequired
+    addPost: PropTypes.func.isRequired,
+    resetRequest: PropTypes.func.isRequired,
+    isEdit: PropTypes.bool
 };
 
 export default PostForm;

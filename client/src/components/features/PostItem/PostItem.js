@@ -4,6 +4,8 @@ import SmallTitle from '../../common/SmallTitle/SmallTitle';
 import HtmlBox from '../../common/HtmlBox/HtmlBox';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from "../../common/Alert/Alert";
+import Button from '../../common/Button/Button';
+import {Link} from "react-router-dom";
 
 class PostItem extends React.Component {
     constructor(props) {
@@ -20,6 +22,9 @@ class PostItem extends React.Component {
                     <SmallTitle>{singlePost.title}</SmallTitle>
                     <p>Author: {singlePost.author}</p>
                     <HtmlBox>{singlePost.content}</HtmlBox>
+                    <Link to="/posts/edit">
+                        <Button variant="info">Edit post</Button>
+                    </Link>
                 </div>
             )
         } else if (request.pending || request.success === null) {
