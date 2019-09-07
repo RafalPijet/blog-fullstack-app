@@ -52,3 +52,20 @@ exports.updatePost = async (req, res) => {
         res.status(500).json(err)
     }
 };
+
+exports.getPostsByRange = async (req, res) => {
+    let {startA, limit} = req.params;
+    startA = parseInt(startA);
+    limit = parseInt(limit);
+
+    try {
+        let posts = await Post.find().skip(startA).limit(limit);
+        let amount = await Post.countDocuments();
+        res.status(200).json({
+            posts,
+            amount
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+};

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import PostsList from '../../layouts/PostsList/PostsList';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
+import Pagination from '../../common/Pagination/Pagination';
 
 class Posts extends React.Component {
 
@@ -15,7 +16,13 @@ class Posts extends React.Component {
         const {posts, request} = this.props;
 
         if (!request.pending && request.success && posts.length > 0) {
-            return <PostsList posts={posts}/>;
+            return (
+                <div>
+                    <PostsList posts={posts}/>
+                    <Pagination pages={10} onPageChange={page => console.log(page)}/>
+                </div>
+                )
+
         } else if (request.pending || request.success === null) {
             return <Spinner/>;
         } else if (!request.pending && request.error !== null) {
