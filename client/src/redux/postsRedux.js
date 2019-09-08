@@ -6,6 +6,7 @@ const createActionName = name => `app/${reducerName}/${name}`;
 
 export const LOAD_POSTS = createActionName('LOAD_POSTS');
 export const LOAD_POST = createActionName('LOAD_POST');
+export const LOAD_POST_PAGE = createActionName('LOAD_POST_PAGE');
 export const START_REQUEST = createActionName('START_REQUEST');
 export const STOP_REQUEST = createActionName('STOP_REQUEST');
 export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
@@ -13,6 +14,7 @@ export const RESET_REQUEST = createActionName('RESET_REQUEST');
 
 export const loadPosts = payload => ({payload, type: LOAD_POSTS});
 export const loadPost = post => ({post, type: LOAD_POST});
+export const loadPostsByPage = payload => ({payload, type: LOAD_POST_PAGE});
 export const startRequest = () => ({type: START_REQUEST});
 export const stopRequest = () => ({type: STOP_REQUEST});
 export const errorRequest = error => ({error, type: ERROR_REQUEST});
@@ -20,6 +22,7 @@ export const resetRequest = () => ({type: RESET_REQUEST});
 
 export const getPosts = ({posts}) => posts.data;
 export const getPost = ({posts}) => posts.singlePost;
+export const getPages = ({posts}) => Math.ceil(posts.amount / posts.postsPerPage);
 export const getQuantityOfPosts = ({posts}) => posts.data.length;
 export const getRequest = ({posts}) => posts.request;
 
@@ -84,11 +87,40 @@ export const updatePostRequest = post => {
 
         try {
             await new Promise(resolve => setTimeout(resolve, 2000));
-            axios.put(`${API_URL}/posts`, post)
+            await axios.put(`${API_URL}/posts`, post)
                 .then(() => dispatch(stopRequest()))
                 .catch(err => dispatch(errorRequest(err.message)));
         } catch (err) {
             dispatch(errorRequest(err.message))
+        }
+    }
+};
+
+export const loadPostsByPageRequest = page => {
+    return async dispatch => {
+        dispatch(startRequest());
+
+        try {
+            const postsPerPage = 10;
+
+            const startA = (page - 1) * postsPerPage;
+            const limit = postsPerPage;
+
+            let res = await axios.get(`${API_URL}/posts/range/${startA}/${limit}`);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            console.log(res);
+            const payload = {
+                posts: res.data.posts,
+                amount: res.data.amount,
+                postsPerPage,
+                presentPage: page
+            };
+
+            dispatch(loadPostsByPage(payload));
+            dispatch(stopRequest());
+
+        } catch (err) {
+            dispatch(errorRequest(err.message));
         }
     }
 };
@@ -100,7 +132,10 @@ const initialState = {
         error: null,
         success: null
     },
-    singlePost: {}
+    singlePost: {},
+    amount: 0,
+    postsPerPage: 10,
+    presentPage: 1
 };
 
 export default function reducer(statePart = initialState, action = {}) {
@@ -109,6 +144,14 @@ export default function reducer(statePart = initialState, action = {}) {
             return {...statePart, data: action.payload};
         case LOAD_POST:
             return {...statePart, singlePost: action.post};
+        case LOAD_POST_PAGE:
+            return {
+                ...statePart,
+                presentPage: action.payload.presentPage,
+                postsPerPage: action.payload.postsPerPage,
+                amount: action.payload.amount,
+                data: [...action.payload.posts]
+            };
         case START_REQUEST:
             return {...statePart, request: {pending: true, error: null, success: null}};
         case STOP_REQUEST:
