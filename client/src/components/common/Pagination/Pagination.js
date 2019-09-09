@@ -5,16 +5,18 @@ import './Pagination.scss';
 class Pagination extends React.Component {
 
     state = {
-        presentPage: this.props.presentPage || 1,
+        isActive: this.props.isActive === undefined || this.props.isActive,
+        presentPage: this.props.initialPage,
         leftArrowIsHidden: true,
         rightArrowIsHidden: false
     };
 
     componentDidMount() {
-        const {presentPage, pages} = this.props;
-        presentPage > 1 ? this.setState({leftArrowIsHidden: false}) :
+        console.log(this.props.isActive);
+        const {initialPage, pages} = this.props;
+        initialPage > 1 ? this.setState({leftArrowIsHidden: false}) :
             this.setState({leftArrowIsHidden: true});
-        presentPage < pages ? this.setState({rightArrowIsHidden: false}) :
+        initialPage < pages ? this.setState({rightArrowIsHidden: false}) :
             this.setState({rightArrowIsHidden: true})
     }
 
@@ -35,27 +37,27 @@ class Pagination extends React.Component {
 
     render() {
         const {pages} = this.props;
-        const {presentPage, leftArrowIsHidden, rightArrowIsHidden} = this.state;
+        const {presentPage, leftArrowIsHidden, rightArrowIsHidden, isActive} = this.state;
         const {changePage, changeWithArrow} = this;
 
         return (
-            <div className="pagination">
+            <div hidden={!isActive} className="pagination">
                 <ul className="pagination__list">
                     <li className={`pagination__list__item`}
-                    onClick={() => changeWithArrow(true)}
-                    hidden={leftArrowIsHidden}>{"<"}</li>
+                        onClick={() => changeWithArrow(true)}
+                        hidden={leftArrowIsHidden}>{"<"}</li>
                     {[...Array(pages)].map((element, page) =>
-                    <li
-                        key={++page}
-                        onClick={() => changePage(page)}
-                        className={`pagination__list__item${((page) === presentPage) ?
-                            ' pagination__list__item--active' : ''}`}>
-                        {page}
-                    </li>
+                        <li
+                            key={++page}
+                            onClick={() => changePage(page)}
+                            className={`pagination__list__item${((page) === presentPage) ?
+                                ' pagination__list__item--active' : ''}`}>
+                            {page}
+                        </li>
                     )}
                     <li className={`pagination__list__item`}
-                    onClick={() => changeWithArrow(false)}
-                    hidden={rightArrowIsHidden}>{">"}</li>
+                        onClick={() => changeWithArrow(false)}
+                        hidden={rightArrowIsHidden}>{">"}</li>
                 </ul>
             </div>
         );
@@ -65,7 +67,8 @@ class Pagination extends React.Component {
 Pagination.propTypes = {
     pages: PropTypes.number.isRequired,
     initialPage: PropTypes.number,
-    onPageChange: PropTypes.func.isRequired
+    onPageChange: PropTypes.func.isRequired,
+    isActive: PropTypes.bool
 };
 
 export default Pagination;

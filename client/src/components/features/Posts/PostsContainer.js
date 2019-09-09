@@ -6,11 +6,11 @@ const mapStateToProps = state => ({
     posts: getPosts(state),
     request: getRequest(state),
     pages: getPages(state),
-    presentPage: getPresentPage(state)
+    initialPage: getPresentPage(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadPostsByPage: page => dispatch(loadPostsByPageRequest(page))
+    loadPostsByPage: (page, postsPerPage) => dispatch(loadPostsByPageRequest(page, postsPerPage))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
