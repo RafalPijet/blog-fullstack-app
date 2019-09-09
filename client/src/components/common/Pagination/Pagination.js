@@ -12,7 +12,7 @@ class Pagination extends React.Component {
     };
 
     componentDidMount() {
-        console.log(this.props.isActive);
+
         const {initialPage, pages} = this.props;
         initialPage > 1 ? this.setState({leftArrowIsHidden: false}) :
             this.setState({leftArrowIsHidden: true});

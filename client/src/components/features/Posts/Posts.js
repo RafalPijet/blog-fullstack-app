@@ -8,27 +8,29 @@ import Pagination from '../../common/Pagination/Pagination';
 class Posts extends React.Component {
 
     componentDidMount() {
-        const {loadPostsByPage, initialPage} = this.props;
-        loadPostsByPage(initialPage, 3);
+        const {loadPostsByPage, initialPage, postsPerPage} = this.props;
+        initialPage !== undefined ? loadPostsByPage(initialPage, postsPerPage || 3) :
+            loadPostsByPage(1, postsPerPage || 3);
     }
 
     loadPostsPage = page => {
-        const {loadPostsByPage} = this.props;
-        loadPostsByPage(page, 3);
+        const {loadPostsByPage, postsPerPage} = this.props;
+        loadPostsByPage(page, postsPerPage || 3);
     };
 
     render() {
-        const {posts, request, pages, initialPage} = this.props;
+        const {posts, request, pages, initialPage, pagination, selectedPage} = this.props;
         const {loadPostsPage} = this;
-
+        
         if (!request.pending && request.success && posts.length > 0) {
             return (
                 <div>
                     <PostsList posts={posts}/>
                     <Pagination pages={pages} onPageChange={loadPostsPage}
-                    initialPage={initialPage} isActive={true}/>
+                                initialPage={initialPage !== undefined ? initialPage : selectedPage}
+                                isActive={pagination}/>
                 </div>
-                )
+            )
 
         } else if (request.pending || request.success === null) {
             return <Spinner/>;
@@ -49,8 +51,11 @@ Posts.propTypes = {
             author: PropTypes.string.isRequired
         })
     ),
-    loadPostsByPage: PropTypes.func.isRequired,
-    initialPage: PropTypes.number.isRequired
+    loadPostsByPage: PropTypes.func,
+    initialPage: PropTypes.number,
+    selectedPage: PropTypes.number,
+    postsPerPage: PropTypes.number,
+    pagination: PropTypes.bool
 };
 
 export default Posts;

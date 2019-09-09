@@ -6,7 +6,7 @@ const mapStateToProps = state => ({
     posts: getPosts(state),
     request: getRequest(state),
     pages: getPages(state),
-    initialPage: getPresentPage(state)
+    selectedPage: getPresentPage(state)
 });
 
 const mapDispatchToProps = dispatch => ({
