@@ -35,7 +35,6 @@ export const loadPostsRequest = () => {
 
         try {
             let res = await axios.get(`${API_URL}/posts`);
-            await new Promise(resolve => setTimeout(resolve, 2000));
             dispatch(loadPosts(res.data));
             dispatch(stopRequest());
         } catch (e) {
@@ -72,8 +71,8 @@ export const addPostRequest = post => {
         dispatch(startRequest());
 
         try {
-            axios.post(`${API_URL}/posts`, post);
             await new Promise(resolve => setTimeout(resolve, 2000));
+            await axios.post(`${API_URL}/posts`, post);
             dispatch(stopRequest());
         } catch (err) {
             dispatch(errorRequest(err.message))

@@ -8,6 +8,7 @@ import Posts from './components/pages/Posts/PostsPage';
 import AddPost from './components/pages/AddPost/AddPost';
 import EditPost from './components/pages/EditPost/EditPost';
 import SinglePost from './components/pages/SinglePost/SinglePost';
+import RandomPost from './components/pages/RandomPost/RandomPost';
 
 class App extends React.Component {
 
@@ -20,6 +21,7 @@ class App extends React.Component {
                         <Route path='/posts' exact component={Posts} />
                         <Route path='/posts/new' exact component={AddPost} />
                         <Route path='/posts/edit' exac component={EditPost}/>
+                        <Route path='/posts/random' exac component={RandomPost}/>
                         <Route path='/contact' exact component={Contact} />
                         <Route path='/posts/:id' exact component={SinglePost} />
                         <Route component={NotFound}/>

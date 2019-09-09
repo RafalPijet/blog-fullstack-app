@@ -59,7 +59,12 @@ exports.getPostsByRange = async (req, res) => {
     limit = parseInt(limit);
 
     try {
-        let posts = await Post.find().skip(startA).limit(limit);
+        let allPosts = await Post.find();
+        let result = [];
+        for (let i = allPosts.length - 1; i > -1; i--) {
+            result.push(allPosts[i]);
+        }
+        let posts = result.slice(startA, startA + limit);
         let amount = await Post.countDocuments();
         res.status(200).json({
             posts,

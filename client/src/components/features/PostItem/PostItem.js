@@ -8,13 +8,35 @@ import Button from '../../common/Button/Button';
 import {Link} from "react-router-dom";
 
 class PostItem extends React.Component {
-    constructor(props) {
-        super(props);
-        this.props.loadPost(this.props.id);
+    
+    state = {
+        singlePost: {}
+    };
+
+    componentDidMount() {
+        const {isRandom} = this.props;
+        const {randomHandling, singleHandling} = this;
+        isRandom ? randomHandling() : singleHandling();
     }
 
+    singleHandling = async () => {
+        const {loadPost, id} = this.props;
+        await loadPost(id);
+        console.log(typeof id);
+        this.setState({singlePost: this.props.singlePost})
+    };
+
+    randomHandling = async () => {
+        const {loadPost, loadPosts} = this.props;
+        await loadPosts();
+        let posts = this.props.posts;
+        await loadPost(posts[Math.round(Math.random() * (posts.length - 1))].id);
+        this.setState({singlePost: this.props.singlePost});
+    };
+
     render() {
-        const {singlePost, request} = this.props;
+        const {singlePost} = this.state;
+        const {request} = this.props;
 
         if (!request.pending && request.success) {
             return (
@@ -44,7 +66,10 @@ PostItem.propTypes = {
         content: PropTypes.string,
         author: PropTypes.string
     }),
-    loadPost: PropTypes.func.isRequired
+    loadPost: PropTypes.func,
+    loadPosts: PropTypes.func,
+    isRandom: PropTypes.bool,
+    posts: PropTypes.array
 };
 
 export default PostItem;
