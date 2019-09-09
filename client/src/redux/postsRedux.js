@@ -23,6 +23,7 @@ export const resetRequest = () => ({type: RESET_REQUEST});
 export const getPosts = ({posts}) => posts.data;
 export const getPost = ({posts}) => posts.singlePost;
 export const getPages = ({posts}) => Math.ceil(posts.amount / posts.postsPerPage);
+export const getPresentPage = ({posts}) => posts.presentPage;
 export const getQuantityOfPosts = ({posts}) => posts.data.length;
 export const getRequest = ({posts}) => posts.request;
 
@@ -108,7 +109,7 @@ export const loadPostsByPageRequest = page => {
 
             let res = await axios.get(`${API_URL}/posts/range/${startA}/${limit}`);
             await new Promise(resolve => setTimeout(resolve, 2000));
-            console.log(res);
+            
             const payload = {
                 posts: res.data.posts,
                 amount: res.data.amount,

@@ -18,14 +18,15 @@ class Posts extends React.Component {
     };
 
     render() {
-        const {posts, request, pages} = this.props;
+        const {posts, request, pages, presentPage} = this.props;
         const {loadPostsPage} = this;
 
         if (!request.pending && request.success && posts.length > 0) {
             return (
                 <div>
                     <PostsList posts={posts}/>
-                    <Pagination pages={pages} onPageChange={loadPostsPage}/>
+                    <Pagination pages={pages} onPageChange={loadPostsPage}
+                    presentPage={presentPage}/>
                 </div>
                 )
 
@@ -48,7 +49,8 @@ Posts.propTypes = {
             author: PropTypes.string.isRequired
         })
     ),
-    loadPostsByPage: PropTypes.func.isRequired
+    loadPostsByPage: PropTypes.func.isRequired,
+    presentPage: PropTypes.number.isRequired
 };
 
 export default Posts;
