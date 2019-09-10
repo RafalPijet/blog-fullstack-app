@@ -50,7 +50,6 @@ export const loadPostRequest = id => {
 
         try {
             let res = await axios.get(`${API_URL}/posts/${id}`);
-            await new Promise(resolve => setTimeout(resolve, 2000));
 
             if (res.data !== null) {
                 dispatch(loadPost(res.data));
@@ -71,7 +70,6 @@ export const addPostRequest = post => {
         dispatch(startRequest());
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 2000));
             await axios.post(`${API_URL}/posts`, post);
             dispatch(stopRequest());
         } catch (err) {
@@ -86,7 +84,6 @@ export const updatePostRequest = post => {
         dispatch(startRequest());
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 2000));
             await axios.put(`${API_URL}/posts`, post)
                 .then(() => dispatch(stopRequest()))
                 .catch(err => dispatch(errorRequest(err.message)));
@@ -105,7 +102,6 @@ export const loadPostsByPageRequest = (page, postsPerPage) => {
             const limit = postsPerPage;
 
             let res = await axios.get(`${API_URL}/posts/range/${startA}/${limit}`);
-            await new Promise(resolve => setTimeout(resolve, 2000));
 
             const payload = {
                 posts: res.data.posts,
