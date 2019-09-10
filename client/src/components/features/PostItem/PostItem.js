@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {FacebookProvider, Comments} from 'react-facebook';
+import {withRouter} from 'react-router-dom';
 import SmallTitle from '../../common/SmallTitle/SmallTitle';
 import HtmlBox from '../../common/HtmlBox/HtmlBox';
 import Spinner from '../../common/Spinner/Spinner';
@@ -8,7 +10,7 @@ import Button from '../../common/Button/Button';
 import {Link} from "react-router-dom";
 
 class PostItem extends React.Component {
-    
+
     state = {
         singlePost: {}
     };
@@ -22,7 +24,6 @@ class PostItem extends React.Component {
     singleHandling = async () => {
         const {loadPost, id} = this.props;
         await loadPost(id);
-        console.log(typeof id);
         this.setState({singlePost: this.props.singlePost})
     };
 
@@ -36,7 +37,7 @@ class PostItem extends React.Component {
 
     render() {
         const {singlePost} = this.state;
-        const {request} = this.props;
+        const {request, location} = this.props;
 
         if (!request.pending && request.success) {
             return (
@@ -47,6 +48,9 @@ class PostItem extends React.Component {
                     <Link to="/posts/edit">
                         <Button variant="info">Edit post</Button>
                     </Link>
+                    <FacebookProvider appId="710139419429929">
+                        <Comments href={`http://localhost:3000/${location.pathname}`}/>
+                    </FacebookProvider>
                 </div>
             )
         } else if (request.pending || request.success === null) {
@@ -72,4 +76,4 @@ PostItem.propTypes = {
     posts: PropTypes.array
 };
 
-export default PostItem;
+export default withRouter(props => <PostItem {...props}/>);
