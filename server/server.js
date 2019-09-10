@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const aws = require('aws-sdk');
 const helmet = require('helmet');
 const sanitize = require('express-mongo-sanitize');
 const path = require('path');
@@ -18,12 +17,6 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use('/api', postRoutes);
 app.use(express.static(path.join(__dirname, '/../client/build')));
-
-let s3 = new aws.S3({
-    PORT: process.env.PORT,
-    DB: process.env.DB
-    }
-);
 
 mongoose.connect(config.DB, {useNewUrlParser: true});
 let db = mongoose.connection;
