@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FacebookProvider, Comments} from 'react-facebook';
+import {FacebookProvider, Comments, ShareButton} from 'react-facebook';
+import {FaShare} from "react-icons/fa";
 import {withRouter} from 'react-router-dom';
+import {BASE_URL} from "../../../config";
 import SmallTitle from '../../common/SmallTitle/SmallTitle';
 import HtmlBox from '../../common/HtmlBox/HtmlBox';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from "../../common/Alert/Alert";
 import Button from '../../common/Button/Button';
 import {Link} from "react-router-dom";
+import Facebook from "react-facebook/module/FacebookProvider";
 
 class PostItem extends React.Component {
 
@@ -43,13 +46,18 @@ class PostItem extends React.Component {
             return (
                 <div>
                     <SmallTitle>{singlePost.title}</SmallTitle>
+                    <FacebookProvider appId="710139419429929">
+                        <ShareButton className="button" href={`${BASE_URL}${location.pathname}`}>
+                            <FaShare title="share" />
+                        </ShareButton>
+                    </FacebookProvider>
                     <p>Author: {singlePost.author}</p>
                     <HtmlBox>{singlePost.content}</HtmlBox>
                     <Link to="/posts/edit">
                         <Button variant="info">Edit post</Button>
                     </Link>
                     <FacebookProvider appId="710139419429929">
-                        <Comments href={`http://localhost:3000/${location.pathname}`}/>
+                        <Comments href={`${BASE_URL}${location.pathname}`}/>
                     </FacebookProvider>
                 </div>
             )
