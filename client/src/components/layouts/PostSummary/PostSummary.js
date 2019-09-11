@@ -9,7 +9,7 @@ import {cutText} from "../../../utils/functions";
 import {Link} from 'react-router-dom';
 
 const PostSummary = ({id, title, content, author, votes, votesHandling, votesPending}) => {
-    
+
     return (
         <article className="post-summary">
             <SmallTitle>{title}</SmallTitle>
@@ -19,12 +19,12 @@ const PostSummary = ({id, title, content, author, votes, votesHandling, votesPen
                 <Button variant="primary">Read More</Button>
             </Link>
             <Button disabled={votesPending} title='thumbUp' variant={!votesPending ? "success" : " progress"}
-                    onClick={() => votesHandling(id, true)}>
+                    onClick={() => votesHandling(id, true, votes)}>
                 <FaThumbsUp/>
             </Button>
             <span>{votes}</span>
             <Button disabled={votesPending} title='thumbDown' variant={!votesPending ? "danger" : " progress"}
-                    onClick={() => votesHandling(id, false)}>
+                    onClick={() => votesHandling(id, false, votes)}>
                 <FaThumbsDown/>
             </Button>
         </article>

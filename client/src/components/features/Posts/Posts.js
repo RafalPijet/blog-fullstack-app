@@ -18,9 +18,12 @@ class Posts extends React.Component {
         loadPostsByPage(page, postsPerPage || 3);
     };
 
-    votesHandling = (id, isUp) => {
+    votesHandling = (id, isUp, actualVotes) => {
         const {setVotes} = this.props;
-        setVotes(id, isUp);
+
+        if (actualVotes === 0 && isUp || actualVotes > 0) {
+            setVotes(id, isUp)
+        }
     };
 
     render() {

@@ -129,8 +129,6 @@ export const setVotesToSelectedPostRequest = (id, isUp) => {
 
         try {
             let res = await axios.put(`${API_URL}/posts/votes/${id}/${isUp}`);
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
             dispatch(setVotesPost(res.data));
             dispatch(stopRequest());
         } catch (err) {
