@@ -3,6 +3,7 @@
 .button {
   background: transparent;
   border: 1px solid;
+  outline: none;
   color: $color-text-light;
   text-align: center;
   line-height: 1.3;
@@ -25,8 +26,16 @@
     color: $color-danger;
   }
 
+  &--success {
+    color: $color-success;
+  }
+
   &:hover {
     box-shadow: -5px -5px 20px rgba(0,0,0,0.1);
     opacity: 1;
   }
+}
+
+.progress {
+  cursor: progress;
 }

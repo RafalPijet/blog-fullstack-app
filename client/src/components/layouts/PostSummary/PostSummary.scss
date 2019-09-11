@@ -1,5 +1,9 @@
 @import '../../../styles/settings.scss';
 
+span {
+  margin-right: 14px;
+}
+
 .post-summary {
   border-bottom: 1px solid $color-textfield-border;
   padding: $base-size;
@@ -16,3 +20,5 @@
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
   padding-left: $base-size * 1.5;
 }
+
+

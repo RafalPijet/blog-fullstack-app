@@ -11,6 +11,8 @@ export const START_REQUEST = createActionName('START_REQUEST');
 export const STOP_REQUEST = createActionName('STOP_REQUEST');
 export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
 export const RESET_REQUEST = createActionName('RESET_REQUEST');
+export const SET_VOTES_POST = createActionName('SET_VOTES_POST');
+export const CHANGE_REQUEST = createActionName('CHANGE_REQUEST');
 
 export const loadPosts = payload => ({payload, type: LOAD_POSTS});
 export const loadPost = post => ({post, type: LOAD_POST});
@@ -19,6 +21,8 @@ export const startRequest = () => ({type: START_REQUEST});
 export const stopRequest = () => ({type: STOP_REQUEST});
 export const errorRequest = error => ({error, type: ERROR_REQUEST});
 export const resetRequest = () => ({type: RESET_REQUEST});
+export const setVotesPost = post => ({post, type: SET_VOTES_POST});
+export const changeVotes = () => ({type: CHANGE_REQUEST});
 
 export const getPosts = ({posts}) => posts.data;
 export const getPost = ({posts}) => posts.singlePost;
@@ -119,12 +123,29 @@ export const loadPostsByPageRequest = (page, postsPerPage) => {
     }
 };
 
+export const setVotesToSelectedPostRequest = (id, isUp) => {
+    return async dispatch => {
+        dispatch(changeVotes());
+
+        try {
+            let res = await axios.put(`${API_URL}/posts/votes/${id}/${isUp}`);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            dispatch(setVotesPost(res.data));
+            dispatch(stopRequest());
+        } catch (err) {
+            dispatch(errorRequest(err.message));
+        }
+    }
+};
+
 const initialState = {
     data: [],
     request: {
         pending: false,
         error: null,
-        success: null
+        success: null,
+        votes: false
     },
     singlePost: {},
     amount: 0,
@@ -146,14 +167,27 @@ export default function reducer(statePart = initialState, action = {}) {
                 amount: action.payload.amount,
                 data: [...action.payload.posts]
             };
+        case SET_VOTES_POST:
+            return {
+                ...statePart,
+                data: statePart.data.map(post => {
+                    if (post.id === action.post.id) {
+                        return {...post, votes: action.post.votes};
+                    } else {
+                        return post;
+                    }
+                })
+            };
         case START_REQUEST:
-            return {...statePart, request: {pending: true, error: null, success: null}};
+            return {...statePart, request: {pending: true, error: null, success: null, votes: false}};
         case STOP_REQUEST:
-            return {...statePart, request: {pending: false, error: null, success: true}};
+            return {...statePart, request: {pending: false, error: null, success: true, votes: false}};
         case ERROR_REQUEST:
-            return {...statePart, request: {pending: false, error: action.error, success: false}};
+            return {...statePart, request: {pending: false, error: action.error, success: false, votes: false}};
         case RESET_REQUEST:
-            return {...statePart, request: {pending: false, error: null, success: null}};
+            return {...statePart, request: {pending: false, error: null, success: null, votes: false}};
+        case CHANGE_REQUEST:
+            return {...statePart, request: {pending: false, error: null, success: null, votes: true}};
         default:
             return statePart;
     }

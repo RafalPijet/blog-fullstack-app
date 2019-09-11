@@ -7,5 +7,6 @@ router.route('/posts/:id').get(PostController.getPost);
 router.route('/posts/range/:startA/:limit').get(PostController.getPostsByRange);
 router.route('/posts').post(PostController.addPost);
 router.route('/posts').put(PostController.updatePost);
+router.route('/posts/votes/:id/:isUp').put(PostController.updateVotes);
 
 module.exports = router;

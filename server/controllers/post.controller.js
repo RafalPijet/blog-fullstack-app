@@ -28,6 +28,7 @@ exports.addPost = async (req, res) => {
         newPost.author = author;    // newPost.id = uuid();
         newPost.content = content;
         newPost.id = uuid();
+        newPost.votes = 0;
 
         let postSaved = await newPost.save();
         res.status(200).json(postSaved);
@@ -50,6 +51,20 @@ exports.updatePost = async (req, res) => {
 
     } catch (err) {
         res.status(500).json(err)
+    }
+};
+
+exports.updateVotes = async (req, res) => {
+
+    try {
+        let {id, isUp} = req.params;
+        let post = await Post.findOne({id});
+        JSON.parse(isUp) ? post.votes += 1 : post.votes -= 1;
+        let updated = await post.save();
+        res.status(200).json(updated);
+
+    } catch (err) {
+        res.status(500).json(err);
     }
 };
 

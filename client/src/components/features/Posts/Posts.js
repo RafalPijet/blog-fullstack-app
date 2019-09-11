@@ -18,14 +18,19 @@ class Posts extends React.Component {
         loadPostsByPage(page, postsPerPage || 3);
     };
 
+    votesHandling = (id, isUp) => {
+        const {setVotes} = this.props;
+        setVotes(id, isUp);
+    };
+
     render() {
         const {posts, request, pages, initialPage, pagination, selectedPage} = this.props;
-        const {loadPostsPage} = this;
-        
-        if (!request.pending && request.success && posts.length > 0) {
+        const {loadPostsPage, votesHandling} = this;
+
+        if (!request.pending && request.success && posts.length > 0 || request.votes) {
             return (
                 <div>
-                    <PostsList posts={posts}/>
+                    <PostsList posts={posts} votesHandling={votesHandling} votesPending={request.votes}/>
                     <Pagination pages={pages} onPageChange={loadPostsPage}
                                 initialPage={initialPage !== undefined ? initialPage : selectedPage}
                                 isActive={pagination}/>
@@ -48,14 +53,16 @@ Posts.propTypes = {
             id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             content: PropTypes.string.isRequired,
-            author: PropTypes.string.isRequired
+            author: PropTypes.string.isRequired,
+            votes: PropTypes.number.isRequired
         })
     ),
     loadPostsByPage: PropTypes.func,
     initialPage: PropTypes.number,
     selectedPage: PropTypes.number,
     postsPerPage: PropTypes.number,
-    pagination: PropTypes.bool
+    pagination: PropTypes.bool,
+    setVotes: PropTypes.func
 };
 
 export default Posts;
