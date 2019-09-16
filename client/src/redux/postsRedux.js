@@ -104,7 +104,6 @@ export const loadPostsByPageRequest = (page, postsPerPage) => {
         try {
             const startA = (page - 1) * postsPerPage;
             const limit = postsPerPage;
-
             let res = await axios.get(`${API_URL}/posts/range/${startA}/${limit}`);
 
             const payload = {
