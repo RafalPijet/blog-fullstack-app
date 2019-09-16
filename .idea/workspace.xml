@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53ff6f41-948e-4587-a54a-54156fecead1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/build/asset-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/build/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/build/precache-manifest.495f03c2956034b3df429704dff7d7e8.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/build/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/build/service-worker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/build/static/js/main.cdb6ba18.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/build/static/js/main.cdb6ba18.chunk.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/config.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -764,12 +769,12 @@
       <workItem from="1567094836440" duration="7588000" />
       <workItem from="1567163673273" duration="61645000" />
       <workItem from="1567663718500" duration="49000" />
-      <workItem from="1567664681759" duration="131916000" />
+      <workItem from="1567664681759" duration="132567000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="214095000" />
+    <option name="totallyTimeSpent" value="214746000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="23" width="2560" height="1335" extended-state="6" />
