@@ -20,8 +20,8 @@ class App extends React.Component {
                         <Route path='/' exact component={Home} />
                         <Route path='/posts' exact component={Posts} />
                         <Route path='/posts/new' exact component={AddPost} />
-                        <Route path='/posts/edit' exac component={EditPost}/>
-                        <Route path='/posts/random' exac component={RandomPost}/>
+                        <Route path='/posts/edit' exact component={EditPost}/>
+                        <Route path='/posts/random' exact component={RandomPost}/>
                         <Route path='/contact' exact component={Contact} />
                         <Route path='/posts/:id' exact component={SinglePost} />
                         <Route component={NotFound}/>
