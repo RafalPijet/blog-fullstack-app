@@ -15,7 +15,7 @@ app.use(helmet());
 app.use(sanitize());
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use('/api', postRoutes);
+app.use(postRoutes);
 app.use(express.static(path.join(__dirname, '/../client/build')));
 
 mongoose.connect(config.DB, {useNewUrlParser: true});

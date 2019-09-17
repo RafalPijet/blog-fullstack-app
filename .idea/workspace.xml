@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="53ff6f41-948e-4587-a54a-54156fecead1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -25,8 +24,8 @@
               <file pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/server/server.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="279">
-                      <caret line="28" column="28" lean-forward="true" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
+                    <state relative-caret-position="41">
+                      <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
                     </state>
                   </provider>
                 </entry>
@@ -102,7 +101,7 @@
                 <entry file="file://$PROJECT_DIR$/client/package.json">
                   <provider selected="true" editor-type-id="text-editor">
                     <state relative-caret-position="321">
-                      <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+                      <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
                     </state>
                   </provider>
                 </entry>
@@ -323,7 +322,7 @@
                     <entry file="file://$PROJECT_DIR$/client/src/config.js">
                       <provider selected="true" editor-type-id="text-editor">
                         <state relative-caret-position="44">
-                          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+                          <caret line="2" selection-start-line="2" selection-end-line="2" />
                         </state>
                       </provider>
                     </entry>
@@ -566,8 +565,8 @@
         <option value="$PROJECT_DIR$/client/src/components/layouts/PostSummary/PostSummary.js" />
         <option value="$PROJECT_DIR$/client/src/components/features/Posts/Posts.js" />
         <option value="$PROJECT_DIR$/client/src/redux/postsRedux.js" />
-        <option value="$PROJECT_DIR$/server/server.js" />
         <option value="$PROJECT_DIR$/client/src/config.js" />
+        <option value="$PROJECT_DIR$/server/server.js" />
       </list>
     </option>
   </component>
@@ -706,18 +705,18 @@
       <workItem from="1567094836440" duration="7588000" />
       <workItem from="1567163673273" duration="61645000" />
       <workItem from="1567663718500" duration="49000" />
-      <workItem from="1567664681759" duration="142872000" />
+      <workItem from="1567664681759" duration="143649000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="225051000" />
+    <option name="totallyTimeSpent" value="225828000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="23" width="2560" height="1335" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11437649" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11437649" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -735,7 +734,7 @@
       <window_info anchor="bottom" id="Docker" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49960285" visible="true" weight="0.14400643" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49960285" visible="true" weight="0.14400643" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50039715" side_tool="true" weight="0.10619469" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1130,7 +1129,7 @@
     <entry file="file://$PROJECT_DIR$/client/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
-          <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+          <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -1154,17 +1153,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="28" column="28" lean-forward="true" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41">
+          <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
         </state>
       </provider>
     </entry>
